@@ -13,7 +13,7 @@ import {
     useNumberInput,
 } from '@chakra-ui/react';
 
-export default function Form() {
+export default function StoryForm() {
     const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
         useNumberInput({
             step: 1,
