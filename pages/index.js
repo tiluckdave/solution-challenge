@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Form from '@/components/Form.js'
 import Container from '@/components/Container.js'
+import Form from '@/components/Form.js'
 
 export default function Home() {
   return (
