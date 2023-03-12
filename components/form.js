@@ -1,86 +1,78 @@
 import React from 'react'
-import { Textarea, Text, Stack, Heading, Button, Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 import {
-    NumberInput,
-    NumberInputField,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    NumberDecrementStepper,
-} from '@chakra-ui/react'
+    Button,
+    FormControl,
+    Flex,
+    Heading,
+    FormLabel,
+    HStack,
+    Textarea,
+    Input,
+    Stack,
+    Text,
+    useNumberInput,
+} from '@chakra-ui/react';
 
+export default function Form() {
+    const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
+        useNumberInput({
+            step: 1,
+            defaultValue: 15,
+            min: 1,
+            max: 99,
+        })
 
-function Form() {
-
-    let [value, setValue] = React.useState('')
-
-
-    let handleInputChange = (e) => {
-        let inputValue = e.target.value
-        setValue(inputValue)
-    }
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        console.log(value);
-    }
+    const inc = getIncrementButtonProps()
+    const dec = getDecrementButtonProps()
+    const input = getInputProps()
 
     return (
-        <>
-            <Card align='center'>
-                <CardHeader>
-                    <Heading size='md'> Speak-Out</Heading>
-                </CardHeader>
-                <CardBody>
+        <Flex
+            w={'full'}
+            align={'center'}
+            justify={'center'}>
+            <Stack
+                spacing={4}
+                w={'full'}
+                maxW={'lg'}
+                bg='white'
+                rounded={'xl'}
+                boxShadow={'lg'}
+                p={6}
+                my={12}>
+                <Heading lineHeight={1.1} textAlign='center' fontSize={{ base: '2xl', md: '3xl' }}>
+                    Share your Story
+                </Heading>
+                <Text textAlign='center'
+                    fontSize={{ base: 'sm', sm: 'md' }}
+                    color='gray.800'>
+                    Shhh! Its Anonymous 🤫
+                </Text>
+                <FormControl id="age" my={8}>
+                    <FormLabel>Enter your Age</FormLabel>
+                    <HStack w='full'>
+                        <Button {...dec}>-</Button>
+                        <Input {...input} />
+                        <Button {...inc}>+</Button>
+                    </HStack>
+                </FormControl>
+                <FormControl id="story" my={8}>
+                    <FormLabel>Free your mind, share what you can&apos;t speak to anyone</FormLabel>
+                    <Textarea rows={10}
+                        placeholder='Type here...' />
+                </FormControl>
 
-                    <Age />
-                    <Stack>
-                        <Text mb='8px'>Free your mind, share what you can&apos;t speak to anyone: </Text>
-                        <Textarea
-                            value={value}
-                            onChange={handleInputChange}
-                            placeholder='Type here...'
-                            size='sm' />
-
-                    </Stack>
-
-                </CardBody>
-                <CardFooter>
-                    <Button colorScheme='blue' className='share' onClick={handleSubmit}>Share</Button>
-                </CardFooter>
-            </Card>
-
-        </>
-    )
-}
-
-const Age = () => {
-    const [numberValue, setNumberValue] = React.useState(0);
-
-    const handleNumberChange = (valueAsNumber) => {
-        setNumberValue(valueAsNumber);
-        console.log(valueAsNumber); // Logs the number value to the console
-    };
-    return (
-        <>
-            <Stack>
-                <Text mb='8px'>Enter your age</Text>
-                <Stack shouldWrapChildren direction='row'>
-                    <NumberInput size='md' value={numberValue} onChange={handleNumberChange} >
-                        <NumberInputField />
-                        <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                        </NumberInputStepper>
-                    </NumberInput>
+                <Stack spacing={6}>
+                    <Button
+                        bg={'blue.400'}
+                        color={'white'}
+                        _hover={{
+                            bg: 'blue.500',
+                        }}>
+                        Share
+                    </Button>
                 </Stack>
-                {/* <Button colorScheme='blue' className='share' onClick={handleSubmit}>Share</Button> */}
             </Stack>
-
-        </>
-    )
+        </Flex>
+    );
 }
-
-
-
-
-export default Form
