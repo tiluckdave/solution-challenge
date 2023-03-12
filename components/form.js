@@ -34,7 +34,7 @@ function Form() {
 
                     <Age />
                     <Stack>
-                        <Text mb='8px'>Free your mind, share what you can't speak to anyone: </Text>
+                        <Text mb='8px'>Free your mind, share what you can&apos;t speak to anyone: </Text>
                         <Textarea
                             value={value}
                             onChange={handleInputChange}

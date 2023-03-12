@@ -9,7 +9,7 @@ import Link from 'next/link'
     <nav className={styles.mainav}>
           <ul className={styles.link}>
           <Link href='/'><li><span className={styles.span}>SpeakOut</span></li></Link>
-          <Link href='/about'><li className={styles.about}>About Us</li></Link>
+          <Link href='/about'><li className={styles.about}>About</li></Link>
           
           </ul>
         </nav> 
