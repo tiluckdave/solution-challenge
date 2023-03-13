@@ -33,7 +33,7 @@ export default function Container({ children }) {
                     .catch((error) => console.log("error", error));
             }
         }
-    }, [ address ]);
+    }, [ longitude, latitude ]);
 
     if (address == null) {
         return <Flex align={'center'} justify={'center'} width="full" height={'100vh'}>
