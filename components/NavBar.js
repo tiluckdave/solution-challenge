@@ -11,12 +11,13 @@ export default function Navbar() {
   return (
     <Box borderBottom={1}
       borderStyle={'solid'}
-      borderColor='gray.200'>
+      borderColor='gray.200'
+      width='full' px={4}>
       <Flex
         bg='white'
         minH='60px'
+        px={{ base: '0', md: '16' }}
         mx={'auto'}
-        width='5xl'
         align={'center'}>
         <Link href='/'>
           <Heading
