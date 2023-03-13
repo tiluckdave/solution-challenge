@@ -7,7 +7,7 @@ import {
   Link
 } from '@chakra-ui/react';
 
-export default function Navbar() {
+export default function Navbar({ children }) {
   return (
     <Box borderBottom={1}
       borderStyle={'solid'}
@@ -26,6 +26,7 @@ export default function Navbar() {
             SpeakOut
           </Heading>
         </Link>
+        {children}
         <Spacer />
         <Link href='/about'>About</Link>
       </Flex>
