@@ -4,10 +4,11 @@ import {
   Flex,
   Heading,
   Spacer,
-  Link
+  Link, Tag, TagLabel, TagLeftIcon
 } from '@chakra-ui/react';
+import { MdMyLocation } from "react-icons/md";
 
-export default function Navbar({ children }) {
+export default function Navbar({ address }) {
   return (
     <Box borderBottom={1}
       borderStyle={'solid'}
@@ -26,7 +27,10 @@ export default function Navbar({ children }) {
             SpeakOut
           </Heading>
         </Link>
-        {children}
+        <Tag size='lg' colorScheme='gray' borderRadius='full' ml={6}>
+          <TagLeftIcon as={MdMyLocation} />
+          <TagLabel>{address}</TagLabel>
+        </Tag>
         <Spacer />
         <Link href='/about'>About</Link>
       </Flex>
