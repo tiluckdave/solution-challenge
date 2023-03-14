@@ -11,8 +11,9 @@ export default function Container({ children }) {
     let [ longitude, setLongitude ] = useState(null);
 
     useEffect(() => {
-        if (localStorage.getItem('address') != null) {
+        if (localStorage.getItem('address')!=null) {
             setAddress(localStorage.getItem('address'));
+            console.log('hiii');
         } else {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
@@ -29,6 +30,7 @@ export default function Container({ children }) {
                     .then((result) => {
                         setAddress(result.features[ 0 ].properties.city + ", " + result.features[ 0 ].properties.state);
                         localStorage.setItem('address', address);
+                        console.log('hi2');
                     })
                     .catch((error) => console.log("error", error));
             }
