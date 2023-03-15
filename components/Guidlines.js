@@ -1,5 +1,5 @@
-import React from 'react'
-import {Button, useDisclosure, UnorderedList, ListItem } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { Button, useDisclosure, UnorderedList, ListItem, Checkbox,Check } from '@chakra-ui/react'
 import {
     Modal,
     ModalOverlay,
@@ -9,14 +9,14 @@ import {
     ModalBody,
     ModalCloseButton,
 } from '@chakra-ui/react'
-const Guidlines = () => {
+const Guidlines = ({isChecked,setIsChecked}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-
+   
 
     return (
         <>
 
-            <Button onClick={onOpen}>How to share</Button>
+            <Button onClick={onOpen}>Read Guidlines</Button>
 
             <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
@@ -25,7 +25,7 @@ const Guidlines = () => {
                         Just make sure you follow the basic guidlines </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
-                        
+
                         <UnorderedList>
                             <ListItem p='5px'>Entering your age is required</ListItem>
                             <ListItem p='5px'>Focus on specific actions or behaviors that have affected you.</ListItem>
@@ -34,10 +34,17 @@ const Guidlines = () => {
                             {/* <ListItem p='5px'>You are free to use hate-speech which w</ListItem> */}
                             <ListItem p='5px'>Use &quot;I&quot; statements to express how you feel and make sure you don&apos;t mention the name of any person, use specific pronouns instead.</ListItem>
                         </UnorderedList>
+
+                        <Checkbox
+                            isChecked={isChecked}
+                            onChange={() => setIsChecked(!isChecked)}
+                        >
+                            I have read all the guidlines before sharing
+                        </Checkbox>
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3}  onClick={onClose}>Ok</Button>
+                        <Button colorScheme='blue' mr={3} onClick={onClose}>Ok</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
