@@ -32,7 +32,7 @@ const Guidlines = () => {
                             <ListItem p='5px'>Use clear and concise language to describe the situation.</ListItem>
                             <ListItem p='5px'>Stick to the facts and avoid exaggeration or hyperbole.</ListItem>
                             {/* <ListItem p='5px'>You are free to use hate-speech which w</ListItem> */}
-                            <ListItem p='5px'>Use "I" statements to express how you feel and make sure you don't mention the name of any person, use specific pronouns instead.</ListItem>
+                            <ListItem p='5px'>Use &quot;I&quot; statements to express how you feel and make sure you don&apos;t mention the name of any person, use specific pronouns instead.</ListItem>
                         </UnorderedList>
                     </ModalBody>
 

@@ -78,7 +78,7 @@ export default function StoryForm() {
                         isChecked={isChecked}
                         onChange={() => setIsChecked(!isChecked)}
                     >
-                      "I have read all the guidlines before sharing"
+                      &quot;I have read all the guidlines before sharing&quot;
                     </Checkbox>
                     <Button isDisabled={!isChecked}  colorScheme='whatsapp'>Share</Button>
                 </Stack>
