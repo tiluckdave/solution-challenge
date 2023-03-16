@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useRef, useCallback } from "react";
 import {
     Button,
     FormControl,
@@ -12,13 +12,15 @@ import {
     Stack,
     Text,
     useNumberInput,
-    Checkbox, useDisclosure
-
 } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react'
 import Guidlines from "@/components/Guidlines";
-
+import { addStory } from '@/lib/firestore';
 
 export default function StoryForm() {
+    const age = useRef();
+    const story = useRef();
+
     const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
         useNumberInput({
             step: 1,
@@ -27,13 +29,41 @@ export default function StoryForm() {
             max: 99,
         })
 
-
     const inc = getIncrementButtonProps()
     const dec = getDecrementButtonProps()
     const input = getInputProps()
-    const [isChecked, setIsChecked] = useState(false);
-   
+    const [ isChecked, setIsChecked ] = useState(false);
+    const [ loading, setLoading ] = useState(false);
+    const toast = useToast()
 
+    const formHandler = useCallback(
+        () => async (event) => {
+            setLoading(true);
+            event.preventDefault();
+            const data = {
+                age: age.current?.value,
+                story: story.current?.value,
+                location: localStorage.getItem("address"),
+            };
+
+            let { result, error } = await addStory(data);
+            if (error) {
+                console.log(error);
+            } else {
+                toast({
+                    title: 'Success!',
+                    description: "Thank You for sharing your story. Your this step will help someone to get out of such situations easily in future.",
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                })
+            }
+            setIsChecked(false);
+            story.current.value = '';
+            setLoading(false);
+        },
+        []
+    );
 
     return (
         <>
@@ -43,8 +73,9 @@ export default function StoryForm() {
                 justify={'center'}
 
             >
-
                 <Stack
+                    as={'form'}
+                    onSubmit={formHandler()}
                     spacing={4}
                     w={'full'}
                     maxW={'lg'}
@@ -65,24 +96,20 @@ export default function StoryForm() {
                         <FormLabel>Enter your Age</FormLabel>
                         <HStack w='full'>
                             <Button {...dec}>-</Button>
-                            <Input {...input} />
+                            <Input {...input} ref={age} />
                             <Button {...inc}>+</Button>
                         </HStack>
                     </FormControl>
                     <FormControl id="story" my={8}>
                         <FormLabel>Free your mind, share what you can&apos;t speak to anyone</FormLabel>
-                        <Textarea rows={10}
+                        <Textarea rows={10} ref={story}
                             placeholder='Type here...' />
                     </FormControl>
 
-
-                    <Guidlines isChecked={isChecked} setIsChecked={setIsChecked}/>
-                    
-                    <Button isDisabled={!isChecked} colorScheme='whatsapp'>Share</Button>
+                    <Guidlines isChecked={isChecked} setIsChecked={setIsChecked} />
+                    <Button isDisabled={!isChecked} colorScheme='whatsapp' type='submit' isLoading={loading}>Share</Button>
                 </Stack>
-
             </Flex>
-
         </>
     );
 }

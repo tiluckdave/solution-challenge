@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, useDisclosure, UnorderedList, ListItem, Checkbox,Check } from '@chakra-ui/react'
+import { Button, useDisclosure, UnorderedList, ListItem, Checkbox, Check } from '@chakra-ui/react'
 import {
     Modal,
     ModalOverlay,
@@ -9,9 +9,10 @@ import {
     ModalBody,
     ModalCloseButton,
 } from '@chakra-ui/react'
-const Guidlines = ({isChecked,setIsChecked}) => {
+
+const Guidlines = ({ isChecked, setIsChecked }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-   
+
 
     return (
         <>
@@ -21,7 +22,7 @@ const Guidlines = ({isChecked,setIsChecked}) => {
             <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>This platform if for you only, feel free to express your suffering.
+                    <ModalHeader>This platform is for you only, feel free to express your suffering.
                         Just make sure you follow the basic guidlines </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
